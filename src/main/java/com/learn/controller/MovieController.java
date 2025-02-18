@@ -6,18 +6,22 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.learn.entity.Movie;
 import com.learn.exceptions.NotFoundException;
 
 @RestController
+@RequestMapping("/api/movies")
 public class MovieController {
+	
 	
 	Map<String, Movie> movies = new ConcurrentHashMap<String, Movie>();
 	
@@ -57,6 +61,7 @@ public class MovieController {
 		}
 	}
 	
+	@DeleteMapping("/{movieId}")
 	public ResponseEntity<?> deleteMovie(@PathVariable String movieId){
 		if(movies.containsKey(movieId))
 		{
